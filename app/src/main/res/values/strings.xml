@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Joaquín Soto Automóviles</string>
+
+    <!-- Valores del fragment_nuevo.xml -->
+    <string name="txvMarca">Marca</string>
+    <string name="txvModelo">Modelo</string>
+    <string name="txvDescripcion">Descripción</string>
+    <string name="txvPrecio">Precio</string>
+
+    <!-- Valores del menu_nuevo.xml -->
+    <string name="itemModificar">Modificar</string>
+    <string name="itemEliminar">Eliminar</string>
+    <string name="itemPresupuesto">Generar presupuesto</string>
+    <string name="title_activity_detalle_coche">DetalleCoche</string>
+
+    <string name="txvNombreExtra">Nombre del extra</string>
+
+</resources>
