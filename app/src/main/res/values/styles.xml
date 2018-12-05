@@ -15,4 +15,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="botonesBlancos" parent="ThemeOverlay.AppCompat.Dark"></style>
+
 </resources>

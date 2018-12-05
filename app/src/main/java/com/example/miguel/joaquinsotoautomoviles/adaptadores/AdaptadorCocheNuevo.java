@@ -54,10 +54,6 @@ public class AdaptadorCocheNuevo extends BaseAdapter {
         //Obtenemos los datos del coche sobre que hemos pulsado
         Coche listaCochesNuevo = items.get(position);
 
-        //Recogemos el ID del Coche
-        TextView txvIdCoche = (TextView) v.findViewById(R.id.txvIdCoche);
-        txvIdCoche.setText(String.valueOf(listaCochesNuevo.getID_CocheNuevo()));
-
         //Convertimos la imagen de byte a un Array de bytes
         ByteArrayInputStream imageStream = new ByteArrayInputStream(listaCochesNuevo.getFoto());
         Bitmap imagen = BitmapFactory.decodeStream(imageStream);

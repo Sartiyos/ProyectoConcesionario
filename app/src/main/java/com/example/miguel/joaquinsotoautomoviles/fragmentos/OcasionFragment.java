@@ -6,6 +6,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -42,13 +44,26 @@ public class OcasionFragment extends Fragment {
         lisvCochesOcasion = (ListView) rootView.findViewById(R.id.lisvCochesOcasion);
         btnFlotAdd = (FloatingActionButton) rootView.findViewById(R.id.btnFlotAdd);
 
+        //Creamos un objeto DatabaseAccess para tener acceso a la Base de Datos
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getContext());
+        databaseAccess.open();
+
+        //Obtenemos todas las Personas de la Tabla Persona
+        listaCochesOcasion = databaseAccess.obtenerCochesOcasion();
+
+        //Cerramos la conexión con la Base de Datos
+        databaseAccess.close();
+
+        adaptadorCocheOcasion = new AdaptadorCocheNuevo(getActivity(), listaCochesOcasion);
+
+        lisvCochesOcasion.setAdapter(adaptadorCocheOcasion);
+
         //Creamos una escucha para el ListView
         lisvCochesOcasion.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView txvIdCoche = (TextView) view.findViewById(R.id.txvIdCoche);
+                String codigoCoche = String.valueOf(listaCochesOcasion.get(i).getID_Coche());
                 int nuevo = 2;
-                String codigoCoche = txvIdCoche.getText().toString();
 
                 Intent ModificarCoche = new Intent(getActivity(), CocheDetalles.class);
                 Bundle enviarCoche = new Bundle();
@@ -66,20 +81,6 @@ public class OcasionFragment extends Fragment {
                 Snackbar.make(v, "Tocaste el FAB", Snackbar.LENGTH_LONG).show();
             }
         });
-
-        //Creamos un objeto DatabaseAccess para tener acceso a la Base de Datos
-        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getContext());
-        databaseAccess.open();
-
-        //Obtenemos todas las Personas de la Tabla Persona
-        listaCochesOcasion = databaseAccess.obtenerCochesOcasion();
-
-        //Cerramos la conexión con la Base de Datos
-        databaseAccess.close();
-
-        adaptadorCocheOcasion = new AdaptadorCocheNuevo(getActivity(), listaCochesOcasion);
-
-        lisvCochesOcasion.setAdapter(adaptadorCocheOcasion);
 
         //Devolvemos la Vista
         return rootView;

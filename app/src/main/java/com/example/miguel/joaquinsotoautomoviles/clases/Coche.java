@@ -3,7 +3,7 @@ package com.example.miguel.joaquinsotoautomoviles.clases;
 public class Coche {
 
     //Atributos de la Clase Coche
-    private int ID_CocheNuevo;
+    private int ID_Coche;
     private String marca;
     private String modelo;
     private String descripcion;
@@ -11,8 +11,8 @@ public class Coche {
     private byte[] foto;
 
     //Constructor
-    public Coche(int ID_CocheNuevo, String marca, String modelo, String descripcion, int precio, byte[] foto) {
-        this.ID_CocheNuevo = ID_CocheNuevo;
+    public Coche(int ID_Coche, String marca, String modelo, String descripcion, int precio, byte[] foto) {
+        this.ID_Coche = ID_Coche;
         this.marca = marca;
         this.modelo = modelo;
         this.descripcion = descripcion;
@@ -20,12 +20,12 @@ public class Coche {
         this.foto = foto;
     }
 
-    public int getID_CocheNuevo() {
-        return ID_CocheNuevo;
+    public int getID_Coche() {
+        return ID_Coche;
     }
 
-    public void setID_CocheNuevo(int ID_CocheNuevo) {
-        this.ID_CocheNuevo = ID_CocheNuevo;
+    public void setID_Coche(int ID_CocheNuevo) {
+        this.ID_Coche = ID_Coche;
     }
 
     public String getMarca() {

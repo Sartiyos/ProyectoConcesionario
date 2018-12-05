@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.miguel.joaquinsotoautomoviles.fragmentos.ExtrasFragment;
@@ -24,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Creamos un objeto Toolbar y lo vinculamos con el del XML
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         //Vinculamos el BottomNavigationView con el del XML
         btnNavegacion = (BottomNavigationView) findViewById(R.id.btnNavegacion);
@@ -51,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //nuevo = (NuevoFragment) getFragmentManager().findFragmentById(R.id.contenedor);
+        //Llamamos al método para iniciar el primer fragmento, en este caso el NuevoFragment
         setInitialFragment();
     }
 

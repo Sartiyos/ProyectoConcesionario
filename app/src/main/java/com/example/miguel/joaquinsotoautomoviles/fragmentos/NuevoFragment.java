@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -35,6 +37,9 @@ public class NuevoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        //Indicamos que este fragmento debe rellenar el menú
+        setHasOptionsMenu(true);
+
         //Inflamos la Vista rootView para Visualizar el Adaptador personalizado
         rootView = inflater.inflate(R.layout.fragment_nuevo, container, false);
 
@@ -46,9 +51,8 @@ public class NuevoFragment extends Fragment {
         lisvCochesNuevos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView txvIdCoche = (TextView) view.findViewById(R.id.txvIdCoche);
+                String codigoCoche = String.valueOf(listaCochesNuevos.get(i).getID_Coche());
                 int nuevo = 1;
-                String codigoCoche = txvIdCoche.getText().toString();
 
                 Intent ModificarCoche = new Intent(getActivity(), CocheDetalles.class);
                 Bundle enviarCoche = new Bundle();

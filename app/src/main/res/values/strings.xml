@@ -12,6 +12,7 @@
     <string name="itemEliminar">Eliminar</string>
     <string name="itemPresupuesto">Generar presupuesto</string>
     <string name="title_activity_detalle_coche">DetalleCoche</string>
+    <string name="titNuevoExtra">Nuevo extra</string>
 
     <string name="txvNombreExtra">Nombre del extra</string>
 

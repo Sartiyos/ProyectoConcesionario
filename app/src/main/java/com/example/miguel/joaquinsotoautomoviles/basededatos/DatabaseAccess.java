@@ -221,4 +221,13 @@ public class DatabaseAccess {
         database.insert("Extras", null, datos);
         database.close();
     }
+
+    //Método para borrar un Extra de la Base de Datos
+    public void borrarExtra(int ID_Extra) {
+
+        String where = "ID_Extra = ?";
+        String[] whereArgs = new String[]{ID_Extra + ""};
+
+        database.delete("Extras", where, whereArgs);
+    }
 }
