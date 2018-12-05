@@ -28,8 +28,7 @@ public class CocheDetalles extends AppCompatActivity {
     private ImageView imgFoto;
 
     //ArrayList que contendrá los Coches Nuevos y los Coches de Ocasión
-    private ArrayList<Coche> detalleCocheNuevo;
-    private ArrayList<Coche> detalleCocheOcasion;
+    private ArrayList<Coche> detalleCoche;
 
     //Enteros donde contendrá el identificador del coche y valor contendrá si es uno nuevo o de
     //ocasión
@@ -69,30 +68,15 @@ public class CocheDetalles extends AppCompatActivity {
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
 
-        //Comprobamos si es un coche nuevo (1) o de ocasion (2)
-        if(valor == 1) {
-            //Obtenemos todas las Personas de la Tabla Persona
-            detalleCocheNuevo = databaseAccess.obtenerDatosCocheNuevo(codigoCoche);
+        //Obtenemos todas las Personas de la Tabla Persona
+        detalleCoche = databaseAccess.obtenerDatosCoche(codigoCoche, valor);
 
-            //Recogemos los datos del Cliente que queremos modificar
-            marca       = detalleCocheNuevo.get(0).getMarca();
-            modelo      = detalleCocheNuevo.get(0).getModelo();
-            descripcion = detalleCocheNuevo.get(0).getDescripcion();
-            precio      = detalleCocheNuevo.get(0).getPrecio();
-            foto        = detalleCocheNuevo.get(0).getFoto();
-        }
-
-        else if (valor == 2) {
-            //Obtenemos todas las Personas de la Tabla Persona
-            detalleCocheOcasion = databaseAccess.obtenerDatosCocheOcasion(codigoCoche);
-
-            //Recogemos los datos del Cliente que queremos modificar
-            marca       = detalleCocheOcasion.get(0).getMarca();
-            modelo      = detalleCocheOcasion.get(0).getModelo();
-            descripcion = detalleCocheOcasion.get(0).getDescripcion();
-            precio      = detalleCocheOcasion.get(0).getPrecio();
-            foto        = detalleCocheOcasion.get(0).getFoto();
-        }
+        //Recogemos los datos del Cliente que queremos modificar
+        marca       = detalleCoche.get(0).getMarca();
+        modelo      = detalleCoche.get(0).getModelo();
+        descripcion = detalleCoche.get(0).getDescripcion();
+        precio      = detalleCoche.get(0).getPrecio();
+        foto        = detalleCoche.get(0).getFoto();
 
         //Cerramos la conexión con la Base de Datos
         databaseAccess.close();

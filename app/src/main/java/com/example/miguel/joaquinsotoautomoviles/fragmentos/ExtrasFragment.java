@@ -34,6 +34,9 @@ public class ExtrasFragment extends Fragment {
     private FloatingActionButton btnFlotAdd;
     private ListView lisvExtras;
 
+    //Objeto para vincular el botón del Toolbar
+    MenuItem itemMenuBorrar;
+
     //Controlar
     private boolean itemPulsado = false; //Comprobamos si hemos pulsado algo en el ListView
     private View ultimoView; //Guardamos el valor del ultimo View para colorear la zona
@@ -63,14 +66,15 @@ public class ExtrasFragment extends Fragment {
                     view.setBackgroundColor(getResources().getColor(R.color.colorAccent)); //Coloreamos el elemento marcado
                     ultimoView = view;              //Guardamos cual es el último elemento pulsado
                     itemPulsado = true;             //Indicamos que ha sido pulsado un elemento
-                    id_extra = listaExtras.get(i).getID_Extra();
+                    id_extra = listaExtras.get(i).getID_Extra(); //Obtenemos la ID del Extra
+                    itemMenuBorrar.setVisible(true); //Mostramos el botón de Borrar en el Toolbar
                 }
 
                 else {
                     ultimoView.setBackgroundColor(Color.alpha(0));  //Quitamos el color al último elemento
                     view.setBackgroundColor(getResources().getColor(R.color.colorAccent));   //Al nuevo elemento lo coloreamos
                     ultimoView = view; //Guardamos este elemento como el último
-                    id_extra = listaExtras.get(i).getID_Extra();
+                    id_extra = listaExtras.get(i).getID_Extra();  //Obtenemos la ID del Extra
                 }
             }
         });
@@ -93,17 +97,24 @@ public class ExtrasFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
         menuInflater = getActivity().getMenuInflater();
         menuInflater.inflate(R.menu.menu_extras, menu);
+        itemMenuBorrar = menu.findItem(R.id.itemExtras1);
+        itemMenuBorrar.setVisible(false);
     }
 
     //Método para comprobar el resultado de las otras actividades
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if ((requestCode == 1) && (resultCode == CrearExtra.RESULT_OK)) {
-            adaptadorExtras();
-            itemPulsado = false;
-        } else if((requestCode == 1) && (resultCode == CrearExtra.RESULT_CANCELED)) {
-            ultimoView.setBackgroundColor(Color.alpha(0));
-            itemPulsado = false;
+            adaptadorExtras(); //Llamamos al método del adaptador para que se actualice
+            itemPulsado = false; //Ponemos en false el booleano para comprobar si tenemos algo pulsado
+            itemMenuBorrar.setVisible(false); //Ocultamos el botón de Borrar en el Toolbar
+        }
+        else if((requestCode == 1) && (resultCode == CrearExtra.RESULT_CANCELED)) {
+            if(ultimoView != null) {
+                ultimoView.setBackgroundColor(Color.alpha(0));
+            }
+            itemPulsado = false; //Ponemos en false el booleano para comprobar si tenemos algo pulsado
+            itemMenuBorrar.setVisible(false); //Mostramos el botón de Borrar en el Toolbar
         }
     }
 
@@ -149,6 +160,7 @@ public class ExtrasFragment extends Fragment {
                     lisvExtras.setAdapter(adaptadorExtras);
                     Snackbar.make(getView(), "Se ha eliminado correctamente", Snackbar.LENGTH_LONG).show();
                     itemPulsado = false;
+                    itemMenuBorrar.setVisible(false);
                     break;
             }
             return true;

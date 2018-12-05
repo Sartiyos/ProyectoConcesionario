@@ -5,6 +5,6 @@
     <item
         android:id="@+id/itemExtras1"
         android:icon="@drawable/ic_borrar"
-        app:showAsAction="ifRoom"
-        android:title="@string/itemEliminar" />
+        android:title="@string/itemEliminar"
+        app:showAsAction="ifRoom" />
 </menu>

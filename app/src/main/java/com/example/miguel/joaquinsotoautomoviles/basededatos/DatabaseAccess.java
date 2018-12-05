@@ -42,79 +42,124 @@ public class DatabaseAccess {
         }
     }
 
+    //METODOS PARA OBTENER DATOS O ELIMINARLOS
 
-    //Método que devuelve todos las Personas de la Tabla persona
-    public ArrayList<Coche> obtenerCochesNuevos() {
+    //Método que devuelve Coches Nuevos o de Ocasion dependiendo del entero
+    public ArrayList<Coche> obtenerCoches(int valor) {
         Cursor c;
+        ArrayList<Coche> listadoCoches = new ArrayList<>();
 
-        //Creamos un ArrayList para guardar todos los datos de las Personas
-        ArrayList<Coche> listadoCochesNuevos = new ArrayList<>();
+        //Coches Nuevos
+        if(valor == 1) {
+            //Consultamos a la Base de Datos y guardamos el resultado en el Cursor
+            c = database.rawQuery("SELECT * FROM CochesNuevos", null);
 
-        //Consultamos a la Base de Datos y guardamos el resultado en el Cursor
-        c = database.rawQuery("SELECT * FROM CochesNuevos", null);
+            if(c.moveToFirst()) { //Nos colocamos al principio del Cursor
 
-        //Nos colocamos al principio del Cursor
-        if(c.moveToFirst()) {
-
-            do {
-                //Vamos añadiendo Personas al ArrayList
-                listadoCochesNuevos.add(new Coche(
-                        c.getInt(0),
-                        c.getString(1),
-                        c.getString(2),
-                        c.getString(3),
-                        c.getInt(4),
-                        c.getBlob(5)));
-            } while(c.moveToNext());
-
+                do { //Vamos añadiendo al ArrayList los Coches con sus valores
+                    listadoCoches.add(new Coche(
+                            c.getInt(0),
+                            c.getString(1),
+                            c.getString(2),
+                            c.getString(3),
+                            c.getInt(4),
+                            c.getBlob(5)));
+                } while(c.moveToNext());
+            }
         }
 
-        //Cerramos el Cursor
-        c.close();
+        //Coches Ocasión
+        else {
+            //Consultamos a la Base de Datos y guardamos el resultado en el Cursor
+            c = database.rawQuery("SELECT * FROM CochesOcasion", null);
 
-        //Devolvemos la lista de Personas que hay en la Tabla Persona
-        return listadoCochesNuevos;
+            if(c.moveToFirst()) { //Nos colocamos al principio del Cursor
+
+                do { //Vamos añadiendo al ArrayList los Coches con sus valores
+                    listadoCoches.add(new Coche(
+                            c.getInt(0),
+                            c.getString(1),
+                            c.getString(2),
+                            c.getString(3),
+                            c.getInt(4),
+                            c.getBlob(5)));
+                } while(c.moveToNext());
+            }
+        }
+
+        c.close(); //Cerramos el Cursor
+        return listadoCoches; //Devolvemos la lista de Coches
     }
 
 
-    //Método que devuelve todos las Personas de la Tabla persona
-    public ArrayList<Coche> obtenerCochesOcasion() {
+    //Método que devuelve un Coche, ya sea Nuevo o de Ocasión a través del entero valor
+    public ArrayList<Coche> obtenerDatosCoche(int codigoCoche, int valor) {
         Cursor c;
 
-        //Creamos un ArrayList para guardar todos los datos de las Personas
-        ArrayList<Coche> listadoCochesOcasion = new ArrayList<>();
+        String codCoche[] = new String[]{String.valueOf(codigoCoche)}; //Converitmos en String el codigoCoche
 
-        //Consultamos a la Base de Datos y guardamos el resultado en el Cursor
-        c = database.rawQuery("SELECT * FROM CochesOcasion", null);
+        ArrayList<Coche> listaCoche = new ArrayList<>(); //Guardamos los datos del coche
 
-        //Nos colocamos al principio del Cursor
-        if(c.moveToFirst()) {
+        //Coche nuevos
+        if(valor == 1) {
+            //Consultamos a la Base de Datos y guardamos el resultado en el Cursor
+            c = database.rawQuery("SELECT * FROM CochesNuevos WHERE ID_CocheNuevo = ?", codCoche);
 
-            do {
-                //Vamos añadiendo Personas al ArrayList
-                listadoCochesOcasion.add(new Coche(
-                        c.getInt(0),
-                        c.getString(1),
-                        c.getString(2),
-                        c.getString(3),
-                        c.getInt(4),
-                        c.getBlob(5)));
-            } while(c.moveToNext());
+            //Nos colocamos al principio del Cursor
+            if(c.moveToFirst()) {
 
+                do { //Vamos añadiendo al ArrayList los Coches con sus valores
+                    listaCoche.add(new Coche(
+                            c.getInt(0),
+                            c.getString(1),
+                            c.getString(2),
+                            c.getString(3),
+                            c.getInt(4),
+                            c.getBlob(5)));
+                } while(c.moveToNext());
+            }
         }
 
-        //Cerramos el Cursor
-        c.close();
+        //Coche ocasión
+        else {
+            //Consultamos a la Base de Datos y guardamos el resultado en el Cursor
+            c = database.rawQuery("SELECT * FROM CochesOcasion WHERE ID_CocheOcasion = ?", codCoche);
 
-        //Devolvemos la lista de Personas que hay en la Tabla Persona
-        return listadoCochesOcasion;
+            //Nos colocamos al principio del Cursor
+            if(c.moveToFirst()) {
+
+                do {
+                    //Vamos añadiendo detalles del coche de ocasion
+                    listaCoche.add(new Coche(
+                            c.getInt(0),
+                            c.getString(1),
+                            c.getString(2),
+                            c.getString(3),
+                            c.getInt(4),
+                            c.getBlob(5)));
+                } while(c.moveToNext());
+            }
+        }
+        c.close(); //Cerramos el Cursor
+        return listaCoche; //Devolvemos la lista de Coches
     }
 
-    //Método que devuelve todos las Personas de la Tabla persona
+
+    //Método que borra un Coche
+    //TODO crear el método
+
+    //Método que modifica un Coche
+    //TODO crear el método
+
+    //Método que crea un Coche
+    //Todo crear el método
+
+
+    //Método que devuelve todos los Extras de la Tabla Extras
     public ArrayList<Extras> obtenerExtras() {
         Cursor c;
 
-        //Creamos un ArrayList para guardar todos los datos de las Personas
+        //Creamos un ArrayList para guardar todos los datos de los Extras
         ArrayList<Extras> listadoExtras = new ArrayList<>();
 
         //Consultamos a la Base de Datos y guardamos el resultado en el Cursor
@@ -123,8 +168,7 @@ public class DatabaseAccess {
         //Nos colocamos al principio del Cursor
         if(c.moveToFirst()) {
 
-            do {
-                //Vamos añadiendo Personas al ArrayList
+            do { //Vamos añadiendo Extras al ArrayList
                 listadoExtras.add(new Extras(
                         c.getInt(0),
                         c.getString(1),
@@ -132,86 +176,11 @@ public class DatabaseAccess {
             } while(c.moveToNext());
 
         }
-
-        //Cerramos el Cursor
-        c.close();
-
-        //Devolvemos la lista de Personas que hay en la Tabla Persona
-        return listadoExtras;
+        c.close(); //Cerramos el Cursor
+        return listadoExtras; //Devolvemos la lista de Extras que hay en la Tabla Extras
     }
 
-    //Método que devuelve todos las Personas de la Tabla persona
-    public ArrayList<Coche> obtenerDatosCocheNuevo(int codigoCoche) {
-
-        //Convertimos el entero en String
-        String codCoche[] = new String[]{String.valueOf(codigoCoche)};
-
-        Cursor c;
-
-        //Creamos un ArrayList para guardar todos los datos de las Personas
-        ArrayList<Coche> listadoCochesNuevos = new ArrayList<>();
-
-        //Consultamos a la Base de Datos y guardamos el resultado en el Cursor
-        c = database.rawQuery("SELECT * FROM CochesNuevos WHERE ID_CocheNuevo = ?", codCoche);
-
-        //Nos colocamos al principio del Cursor
-        if(c.moveToFirst()) {
-
-            do {
-                //Vamos añadiendo Personas al ArrayList
-                listadoCochesNuevos.add(new Coche(
-                        c.getInt(0),
-                        c.getString(1),
-                        c.getString(2),
-                        c.getString(3),
-                        c.getInt(4),
-                        c.getBlob(5)));
-            } while(c.moveToNext());
-        }
-
-        //Cerramos el Cursor
-        c.close();
-
-        //Devolvemos la lista de Personas que hay en la Tabla Persona
-        return listadoCochesNuevos;
-    }
-
-    //Método que devuelve los datos de un coche de ocasion
-    public ArrayList<Coche> obtenerDatosCocheOcasion(int codigoCoche) {
-
-        //Convertimos el entero en String
-        String codCoche[] = new String[]{String.valueOf(codigoCoche)};
-
-        Cursor c;
-
-        //Creamos un ArrayList para guardar todos los datos del coche de ocasion
-        ArrayList<Coche> detallesCocheOcasion = new ArrayList<>();
-
-        //Consultamos a la Base de Datos y guardamos el resultado en el Cursor
-        c = database.rawQuery("SELECT * FROM CochesOcasion WHERE ID_CocheOcasion = ?", codCoche);
-
-        //Nos colocamos al principio del Cursor
-        if(c.moveToFirst()) {
-
-            do {
-                //Vamos añadiendo detalles del coche de ocasion
-                detallesCocheOcasion.add(new Coche(
-                        c.getInt(0),
-                        c.getString(1),
-                        c.getString(2),
-                        c.getString(3),
-                        c.getInt(4),
-                        c.getBlob(5)));
-            } while(c.moveToNext());
-        }
-
-        //Cerramos el Cursor
-        c.close();
-
-        //Devolvemos la lista que contiene los detalles del coche
-        return detallesCocheOcasion;
-    }
-
+    
     //Método para guardar un nuevo Extra en la Base de Datos
     public void guardarExtra(Extras extra) {
         ContentValues datos = new ContentValues();
@@ -221,6 +190,7 @@ public class DatabaseAccess {
         database.insert("Extras", null, datos);
         database.close();
     }
+
 
     //Método para borrar un Extra de la Base de Datos
     public void borrarExtra(int ID_Extra) {

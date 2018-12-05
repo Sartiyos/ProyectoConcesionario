@@ -77,7 +77,7 @@ public class NuevoFragment extends Fragment {
         databaseAccess.open();
 
         //Obtenemos todas las Personas de la Tabla Persona
-        listaCochesNuevos = databaseAccess.obtenerCochesNuevos();
+        listaCochesNuevos = databaseAccess.obtenerCoches(1);
 
         //Cerramos la conexión con la Base de Datos
         databaseAccess.close();

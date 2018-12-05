@@ -49,7 +49,7 @@ public class OcasionFragment extends Fragment {
         databaseAccess.open();
 
         //Obtenemos todas las Personas de la Tabla Persona
-        listaCochesOcasion = databaseAccess.obtenerCochesOcasion();
+        listaCochesOcasion = databaseAccess.obtenerCoches(2);
 
         //Cerramos la conexión con la Base de Datos
         databaseAccess.close();
