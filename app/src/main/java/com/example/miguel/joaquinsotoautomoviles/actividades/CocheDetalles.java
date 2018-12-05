@@ -142,6 +142,13 @@ public class CocheDetalles extends AppCompatActivity {
                 setResult(RESULT_OK);
                 finish();
                 break;
+
+            case R.id.itemDetalleCoche3: //Botón del Menú: Generar presupuesto
+                String nombreCoche = marca + " " + modelo;
+                Intent actividadCrearPresupuesto = new Intent(this, CrearPresupuesto.class);
+                actividadCrearPresupuesto.putExtra("coche", nombreCoche.toString());
+                actividadCrearPresupuesto.putExtra("precio", precio);
+                startActivity(actividadCrearPresupuesto);
         }
         return true;
     }

@@ -17,5 +17,7 @@
     <string name="titNuevoExtra">Nuevo extra</string>
 
     <string name="txvNombreExtra">Nombre del extra</string>
+    <string name="txvPrecioCoche">Precio base del coche</string>
+    <string name="txvExtras">Extras añadibles al coche</string>
 
 </resources>

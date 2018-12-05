@@ -3,8 +3,9 @@
     package="com.example.miguel.joaquinsotoautomoviles">
 
     <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera2"
-                  android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -17,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar">
-        <activity android:name=".actividades.MainActivity"
+        <activity
+            android:name=".actividades.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -26,15 +28,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".actividades.CocheDetalles"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".actividades.CrearCoche"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".actividades.CrearExtra"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".actividades.CocheDetalles"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".actividades.CrearCoche"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".actividades.CrearExtra"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".actividades.CrearPresupuesto"></activity>
     </application>
 
 </manifest>
