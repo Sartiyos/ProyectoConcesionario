@@ -11,6 +11,8 @@
     <string name="itemModificar">Modificar</string>
     <string name="itemEliminar">Eliminar</string>
     <string name="itemPresupuesto">Generar presupuesto</string>
+    <string name="itemCamara">Cámara</string>
+    <string name="itemGaleria">Galeria</string>
     <string name="title_activity_detalle_coche">DetalleCoche</string>
     <string name="titNuevoExtra">Nuevo extra</string>
 

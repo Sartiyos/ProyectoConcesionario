@@ -146,13 +146,79 @@ public class DatabaseAccess {
 
 
     //Método que borra un Coche
-    //TODO crear el método
+    public void borrarCoche(int ID_Coche, int valor) {
+        if(valor == 1) {//Borramos en caso de ser un coche nuevo
+            String where = "ID_CocheNuevo = ?";
+            String[] whereArgs = new String[]{ID_Coche + ""};
+
+            database.delete("CochesNuevos", where, whereArgs);
+        }
+        else {//Borramos en caso de ser un coche ocasion
+            String where = "ID_CocheOcasion = ?";
+            String[] whereArgs = new String[]{ID_Coche + ""};
+
+            database.delete("CochesOcasion", where, whereArgs);
+        }
+    }
 
     //Método que modifica un Coche
-    //TODO crear el método
+    public void actualizarCoche(Coche coche, int valor) {
+        ContentValues datos = new ContentValues();
+
+        if(valor == 1) {//Actualizamos el coche en caso de ser Nuevo
+            int ID_CocheNuevo = coche.getID_Coche();
+
+            datos.put("Marca", coche.getMarca());
+            datos.put("Modelo", coche.getModelo());
+            datos.put("Descripcion", coche.getDescripcion());
+            datos.put("Precio", coche.getPrecio());
+
+            String where = "ID_CocheNuevo = ?";
+            String[] whereArgs = new String[]{ID_CocheNuevo + ""};
+
+            database.update("CochesNuevos", datos, where, whereArgs);
+        }
+
+        else {//Actualizamos el coche en caso de ser de Ocasión
+            int ID_CocheOcasion = coche.getID_Coche();
+
+            datos.put("Marca", coche.getMarca());
+            datos.put("Modelo", coche.getModelo());
+            datos.put("Descripcion", coche.getDescripcion());
+            datos.put("Precio", coche.getPrecio());
+
+            String where = "ID_CocheOcasion = ?";
+            String[] whereArgs = new String[]{ID_CocheOcasion + ""};
+
+            database.update("CochesOcasion", datos, where, whereArgs);
+        }
+    }
 
     //Método que crea un Coche
-    //Todo crear el método
+    public void crearCoche(Coche coche, int valor) {
+        ContentValues datos = new ContentValues();
+
+        if(valor == 1) {//Creamos el coche en caso de ser Nuevo
+
+            datos.put("Marca", coche.getMarca());
+            datos.put("Modelo", coche.getModelo());
+            datos.put("Descripcion", coche.getDescripcion());
+            datos.put("Precio", coche.getPrecio());
+            datos.put("Imagen", coche.getFoto());
+
+            database.insert("CochesNuevos", null, datos);
+        }
+
+        else {//Creamos el coche en caso de ser de Ocasión
+            datos.put("Marca", coche.getMarca());
+            datos.put("Modelo", coche.getModelo());
+            datos.put("Descripcion", coche.getDescripcion());
+            datos.put("Precio", coche.getPrecio());
+            datos.put("Imagen", coche.getFoto());
+
+            database.insert("CochesOcasion", null, datos);
+        }
+    }
 
 
     //Método que devuelve todos los Extras de la Tabla Extras
@@ -180,7 +246,7 @@ public class DatabaseAccess {
         return listadoExtras; //Devolvemos la lista de Extras que hay en la Tabla Extras
     }
 
-    
+
     //Método para guardar un nuevo Extra en la Base de Datos
     public void guardarExtra(Extras extra) {
         ContentValues datos = new ContentValues();

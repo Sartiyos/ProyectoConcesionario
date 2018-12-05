@@ -20,6 +20,14 @@ public class Coche {
         this.foto = foto;
     }
 
+    public Coche(String marca, String modelo, String descripcion, int precio, byte[] foto) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.foto = foto;
+    }
+
     public int getID_Coche() {
         return ID_Coche;
     }

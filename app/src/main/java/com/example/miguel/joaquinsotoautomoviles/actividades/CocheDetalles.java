@@ -1,13 +1,18 @@
 package com.example.miguel.joaquinsotoautomoviles.actividades;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -26,6 +31,7 @@ public class CocheDetalles extends AppCompatActivity {
     private EditText edtPrecio;
     private EditText edtDescripcion;
     private ImageView imgFoto;
+    private FloatingActionButton btnFlotSave;
 
     //ArrayList que contendrá los Coches Nuevos y los Coches de Ocasión
     private ArrayList<Coche> detalleCoche;
@@ -36,11 +42,11 @@ public class CocheDetalles extends AppCompatActivity {
     private int valor;
 
     //Atributos de la clase Coche
-    String marca;
-    String modelo;
-    String descripcion;
-    int precio;
-    byte[] foto;
+    private String marca;
+    private String modelo;
+    private String descripcion;
+    private int precio;
+    private byte[] foto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +63,7 @@ public class CocheDetalles extends AppCompatActivity {
         edtPrecio       = (EditText) findViewById(R.id.edtPrecio);
         edtDescripcion  = (EditText) findViewById(R.id.edtDescripcion);
         imgFoto         = (ImageView) findViewById(R.id.imgFoto);
+        btnFlotSave     = (FloatingActionButton) findViewById(R.id.btnFlotSave);
 
         //Preparamos el paquete que nos hemos traido de la otra actividad
         Intent recibidor = getIntent();
@@ -99,7 +106,43 @@ public class CocheDetalles extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_cochenuevo, menu);
+        menuInflater.inflate(R.menu.menu_detallecoche, menu);
+        return true;
+    }
+
+    //Método para comprobar si hemos pulsado algún elemento del Menú
+    @SuppressLint("RestrictedApi")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.itemDetalleCoche1: //Botón del Menú: Modificar
+                edtMarca.setEnabled(true);
+                edtMarca.setTextColor(getResources().getColor(R.color.colorPrimary));
+
+                edtModelo.setEnabled(true);
+                edtModelo.setTextColor(getResources().getColor(R.color.colorPrimary));
+
+                edtDescripcion.setEnabled(true);
+                edtDescripcion.setTextColor(getResources().getColor(R.color.colorPrimary));
+
+                edtPrecio.setEnabled(true);
+                edtPrecio.setTextColor(getResources().getColor(R.color.colorPrimary));
+
+                btnFlotSave.setVisibility(View.VISIBLE);
+
+                break;
+
+            case R.id.itemDetalleCoche2: //Botón del Menú: Vista simple
+                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+                databaseAccess.open();
+                databaseAccess.borrarCoche(codigoCoche, valor);
+                databaseAccess.close();
+                setResult(RESULT_OK);
+                finish();
+                break;
+        }
         return true;
     }
 }
