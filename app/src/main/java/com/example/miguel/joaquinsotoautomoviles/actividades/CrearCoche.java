@@ -41,9 +41,6 @@ public class CrearCoche extends AppCompatActivity {
     private FloatingActionButton btnFlotCrear;
 
     private byte[] imagenCoche;
-    private Uri urlImagen;
-
-    private ArrayList<Coche> cocheNuevo;
 
     private int valor;
 
@@ -174,7 +171,6 @@ public class CrearCoche extends AppCompatActivity {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             imagenCoche = stream.toByteArray();
         }
-        else {}
 
         //Si es 1 viene de la Galería
         if(requestCode == 1){

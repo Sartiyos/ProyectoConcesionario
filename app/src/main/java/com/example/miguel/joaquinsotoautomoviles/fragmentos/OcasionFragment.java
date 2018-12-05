@@ -31,6 +31,8 @@ public class OcasionFragment extends Fragment {
     private FloatingActionButton btnFlotAdd;
     private ListView lisvCochesOcasion;
 
+    private final int valor = 2;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,12 +52,11 @@ public class OcasionFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String codigoCoche = String.valueOf(listaCochesOcasion.get(i).getID_Coche());
-                int nuevo = 2;
 
                 Intent ModificarCoche = new Intent(getActivity(), CocheDetalles.class);
                 Bundle enviarCoche = new Bundle();
                 enviarCoche.putSerializable("codigocoche", Integer.valueOf(codigoCoche));
-                enviarCoche.putSerializable("entero", nuevo);
+                enviarCoche.putSerializable("entero", valor);
                 ModificarCoche.putExtras(enviarCoche);
                 startActivityForResult(ModificarCoche, 1);
             }
@@ -65,8 +66,11 @@ public class OcasionFragment extends Fragment {
         btnFlotAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent actividadCrearCoche = new Intent(getActivity(), CrearCoche.class);
-                startActivity(actividadCrearCoche);
+                Intent actividadCrearCocheNuevo = new Intent(getActivity(), CrearCoche.class);
+                Bundle paquete = new Bundle();
+                paquete.putSerializable("entero", valor);
+                actividadCrearCocheNuevo.putExtras(paquete);
+                startActivityForResult(actividadCrearCocheNuevo, 2);
             }
         });
 
@@ -78,6 +82,10 @@ public class OcasionFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if ((requestCode == 1) && (resultCode == CrearCoche.RESULT_OK)) {
+            adaptadorOcasion(); //Llamamos al método del adaptador para que se actualice
+        }
+
+        if((requestCode == 2) && (resultCode == CrearCoche.RESULT_OK)) {
             adaptadorOcasion(); //Llamamos al método del adaptador para que se actualice
         }
     }
