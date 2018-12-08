@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".actividades.CrearPresupuesto">
+    tools:context=".actividades.CrearResumen">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -13,66 +13,71 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/botonesBlancos"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="@string/titResumen" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:orientation="vertical"
         android:paddingLeft="10dp"
-        android:paddingTop="10dp"
+        android:paddingTop="5dp"
         android:paddingRight="10dp">
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:padding="5dp"
-            android:text="@string/txvPrecioCoche"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:text="Precio coche estándar"
+            android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txvPrecioCoche"
+
+        <LinearLayout
+            android:id="@+id/layCoche"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:padding="5dp"
-            android:text="TextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textStyle="italic" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/txvNombreCoche"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Coche" />
+
+            <TextView
+                android:id="@+id/txvPrecioCoche"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Precio" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/colorPrimary"
             android:padding="5dp"
-            android:text="@string/txvExtras"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:text="Extras"
+            android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
-        <ListView
-            android:id="@+id/lisvExtras"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnFlotGenerar"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/layExtras"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_save"
-        android:tint="@android:color/white"
-        app:backgroundTint="@color/colorPrimary" />
+        android:layout_marginTop="161dp"
+        android:orientation="vertical"
+        android:paddingTop="10dp" />
 
 </android.support.design.widget.CoordinatorLayout>

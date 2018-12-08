@@ -15,6 +15,7 @@
     <string name="itemGaleria">Galeria</string>
     <string name="title_activity_detalle_coche">DetalleCoche</string>
     <string name="titNuevoExtra">Nuevo extra</string>
+    <string name="titResumen">Resumen</string>
 
     <string name="txvNombreExtra">Nombre del extra</string>
     <string name="txvPrecioCoche">Precio base del coche</string>

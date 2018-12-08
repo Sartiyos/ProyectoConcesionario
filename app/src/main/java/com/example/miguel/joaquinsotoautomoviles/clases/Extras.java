@@ -17,6 +17,10 @@ public class Extras {
         this.precio = precio;
     }
 
+    public Extras() {
+
+    }
+
     public int getID_Extra() {
         return ID_Extra;
     }

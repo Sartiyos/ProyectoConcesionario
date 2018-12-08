@@ -221,6 +221,28 @@ public class DatabaseAccess {
     }
 
 
+    //Método para obtener un Extra de la Base de Datos
+    public Extras obtenerExtra(int ID_Extra) {
+
+        Cursor c;
+
+        String idExtra[] = new String[]{String.valueOf(ID_Extra)}; //Converitmos en String del ID_Extras
+
+        Extras extra = new Extras(); //Guardamos los datos del extra
+
+        //Consultamos a la Base de Datos y guardamos el resultado en el Cursor
+        c = database.rawQuery("SELECT * FROM Extras WHERE ID_Extra = ?", idExtra);
+
+        //Nos colocamos al principio del Cursor
+        if(c.moveToFirst()) {
+
+            do { //Vamos añadiendo al ArrayList los Coches con sus valores
+                extra = new Extras(c.getInt(0), c.getString(1), c.getInt(2));
+            } while(c.moveToNext());
+        }
+        return extra;
+    }
+
     //Método que devuelve todos los Extras de la Tabla Extras
     public ArrayList<Extras> obtenerExtras() {
         Cursor c;
