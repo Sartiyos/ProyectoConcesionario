@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layResumen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".actividades.CrearResumen">
@@ -22,7 +23,7 @@
         android:layout_marginTop="56dp"
         android:orientation="vertical"
         android:paddingLeft="10dp"
-        android:paddingTop="5dp"
+        android:paddingTop="10dp"
         android:paddingRight="10dp">
 
         <TextView
@@ -33,6 +34,7 @@
             android:text="Precio coche estándar"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColor="@android:color/white"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
 
@@ -41,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:orientation="horizontal"
             android:padding="5dp">
 
@@ -48,21 +51,26 @@
                 android:id="@+id/txvNombreCoche"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Coche" />
+                android:layout_weight="9"
+                android:padding="5dp"
+                android:text="Coche"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
 
             <TextView
                 android:id="@+id/txvPrecioCoche"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Precio" />
+                android:gravity="right"
+                android:padding="5dp"
+                android:text="Precio"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
             android:padding="5dp"
             android:text="Extras"
@@ -76,8 +84,19 @@
         android:id="@+id/layExtras"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="161dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="186dp"
+        android:layout_marginRight="20dp"
         android:orientation="vertical"
-        android:paddingTop="10dp" />
+        android:padding="5dp" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnFlotEnviar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_email"
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/colorPrimary" />
 
 </android.support.design.widget.CoordinatorLayout>

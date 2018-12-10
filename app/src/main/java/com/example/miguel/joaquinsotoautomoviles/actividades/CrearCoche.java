@@ -64,7 +64,7 @@ public class CrearCoche extends AppCompatActivity {
         edtPrecio       = (EditText) findViewById(R.id.edtNewPrecio);
         edtDescripcion  = (EditText) findViewById(R.id.edtNewDescripcion);
         imgFoto         = (ImageView) findViewById(R.id.imgNewFoto);
-        btnFlotCrear     = (FloatingActionButton) findViewById(R.id.btnFlotCrear);
+        btnFlotCrear    = (FloatingActionButton) findViewById(R.id.btnFlotCrear);
 
         //Creamos una escucha del FloatingActionButton
         btnFlotCrear.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +78,7 @@ public class CrearCoche extends AppCompatActivity {
                 String descripcion  = edtDescripcion.getText().toString();
 
                 if(marca.isEmpty() || modelo.isEmpty() || precio.isEmpty() || descripcion.isEmpty() || imagenCoche == null) {
-                    Snackbar.make(v, "Debe rellenar todos los campos", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(v, "Debe rellenar todos los campos y añadir una foto", Snackbar.LENGTH_LONG).show();
                 }
 
                 else {
@@ -173,7 +173,7 @@ public class CrearCoche extends AppCompatActivity {
         }
 
         //Si es 1 viene de la Galería
-        if(requestCode == 1){
+        if(requestCode == 1) {
             Uri imageURI = data.getData();
             imgFoto.setImageURI(imageURI);
 

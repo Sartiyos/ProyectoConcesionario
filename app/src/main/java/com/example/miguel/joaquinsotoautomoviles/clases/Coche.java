@@ -28,6 +28,15 @@ public class Coche {
         this.foto = foto;
     }
 
+    //Constructor que lo usamos para actualizar la base de datos
+    public Coche(int ID_Coche, String marca, String modelo, String descripcion, int precio) {
+        this.ID_Coche = ID_Coche;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.descripcion = descripcion;
+        this.precio = precio;
+    }
+
     public int getID_Coche() {
         return ID_Coche;
     }

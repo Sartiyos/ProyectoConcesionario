@@ -3,13 +3,16 @@ package com.example.miguel.joaquinsotoautomoviles.actividades;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.example.miguel.joaquinsotoautomoviles.fragmentos.ConocenosFragment;
 import com.example.miguel.joaquinsotoautomoviles.fragmentos.ExtrasFragment;
+import com.example.miguel.joaquinsotoautomoviles.fragmentos.MapsActivity;
 import com.example.miguel.joaquinsotoautomoviles.fragmentos.NuevoFragment;
 import com.example.miguel.joaquinsotoautomoviles.fragmentos.OcasionFragment;
 import com.example.miguel.joaquinsotoautomoviles.R;
@@ -18,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Creamos un objeto de la Clase BottomNavigationView
     private BottomNavigationView btnNavegacion;
-
-    private NuevoFragment nuevo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navegacion_extras:
                         fragment = new ExtrasFragment();
                         break;
+
+                    case R.id.navegacion_conocenos:
+                        fragment = new ConocenosFragment();
+                        break;
                 }
                 replaceFragment(fragment);
                 return true;
@@ -73,6 +78,4 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.contenedor, fragment);
         fragmentTransaction.commit();
     }
-
-
 }

@@ -11,7 +11,7 @@ import com.example.miguel.joaquinsotoautomoviles.R;
 import com.example.miguel.joaquinsotoautomoviles.basededatos.DatabaseAccess;
 import com.example.miguel.joaquinsotoautomoviles.clases.Extras;
 
-public class CrearExtra extends AppCompatActivity {
+public class ModificarExtra extends AppCompatActivity {
 
     //Objetos que identifica a los elementos del XML
     private EditText edtNombre;
@@ -19,16 +19,34 @@ public class CrearExtra extends AppCompatActivity {
     private EditText edtPrecio;
     private FloatingActionButton btnFlotSave;
 
+    //Objetos necesarios
+    private Extras extra;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_extra);
+        setContentView(R.layout.activity_modificar_extra);
+
+        //Recogemos de la otra Actividad el ID del Extra a modificar
+        final int idExtra = getIntent().getIntExtra("id", 1);
+
+        //Creamos un objeto DatabaseAccess para tener acceso a la Base de Datos
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+        databaseAccess.open();
+
+        //Llamamos al método para obtener los datos del extra
+        extra = databaseAccess.obtenerExtra(idExtra);
 
         //Vinculamos los objetos con los elementos del XML
         edtNombre = (EditText) findViewById(R.id.edtNombreExtra);
         edtDescripcion = (EditText) findViewById(R.id.edtDescripcionExtra);
         edtPrecio = (EditText) findViewById(R.id.edtPrecioExtra);
         btnFlotSave = (FloatingActionButton) findViewById(R.id.btnFlotSave);
+
+        //Rellenamos los datos en cada elemento del XML
+        edtNombre.setText(extra.getNombre());
+        edtDescripcion.setText(extra.getDescripcion());
+        edtPrecio.setText(String.valueOf(extra.getPrecio()));
 
         //Creamos una escucha del FloatingActionButton
         btnFlotSave.setOnClickListener(new View.OnClickListener() {
@@ -54,9 +72,9 @@ public class CrearExtra extends AppCompatActivity {
                     DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
                     databaseAccess.open();
 
-                    //Creamos un objeto de tipo Extras y lo añadimos a la base de datos
-                    Extras nuevoExtra = new Extras(nombre, descripcion, precio);
-                    databaseAccess.guardarExtra(nuevoExtra);
+                    //Actualizamos el Extra en la Base de Datos
+                    Extras nuevoExtra = new Extras(idExtra, nombre, descripcion, precio);
+                    databaseAccess.actualizarExtra(nuevoExtra);
 
                     //Cerramos la conexión con la Base de Datos
                     databaseAccess.close();

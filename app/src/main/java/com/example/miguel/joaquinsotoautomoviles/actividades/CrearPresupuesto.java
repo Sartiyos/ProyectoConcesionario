@@ -36,8 +36,9 @@ public class CrearPresupuesto extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_presupuesto);
 
-        String titulo = getIntent().getStringExtra("coche");
-        int precio = getIntent().getIntExtra("precio", 0);
+        final int codigoCoche = getIntent().getIntExtra("id", 1);
+        final String titulo = getIntent().getStringExtra("coche");
+        final int precio = getIntent().getIntExtra("precio", 0);
 
         //Creamos un objeto Toolbar y lo vinculamos con el del XML
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -76,7 +77,10 @@ public class CrearPresupuesto extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent actividadCrearExtra = new Intent(getApplicationContext(), CrearResumen.class);
+                actividadCrearExtra.putExtra("id", codigoCoche);
                 actividadCrearExtra.putExtra("extras", arrayExtras);
+                actividadCrearExtra.putExtra("coche", titulo);
+                actividadCrearExtra.putExtra("precio", precio);
                 startActivity(actividadCrearExtra);
             }
         });

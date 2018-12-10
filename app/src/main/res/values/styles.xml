@@ -15,6 +15,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Estilo para el Toolbar -->
     <style name="botonesBlancos" parent="ThemeOverlay.AppCompat.Dark"></style>
 
 </resources>

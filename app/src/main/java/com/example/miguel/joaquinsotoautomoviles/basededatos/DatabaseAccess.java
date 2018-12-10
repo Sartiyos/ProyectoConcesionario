@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class DatabaseAccess {
 
+    //Atributos de la clase
     private SQLiteAssetHelper openHelper;
     private SQLiteDatabase database;
     private static DatabaseAccess instance;
@@ -42,7 +43,7 @@ public class DatabaseAccess {
         }
     }
 
-    //METODOS PARA OBTENER DATOS O ELIMINARLOS
+    //METODOS PARA LOS COCHES
 
     //Método que devuelve Coches Nuevos o de Ocasion dependiendo del entero
     public ArrayList<Coche> obtenerCoches(int valor) {
@@ -90,7 +91,6 @@ public class DatabaseAccess {
         c.close(); //Cerramos el Cursor
         return listadoCoches; //Devolvemos la lista de Coches
     }
-
 
     //Método que devuelve un Coche, ya sea Nuevo o de Ocasión a través del entero valor
     public ArrayList<Coche> obtenerDatosCoche(int codigoCoche, int valor) {
@@ -144,7 +144,6 @@ public class DatabaseAccess {
         return listaCoche; //Devolvemos la lista de Coches
     }
 
-
     //Método que borra un Coche
     public void borrarCoche(int ID_Coche, int valor) {
         if(valor == 1) {//Borramos en caso de ser un coche nuevo
@@ -166,7 +165,7 @@ public class DatabaseAccess {
         ContentValues datos = new ContentValues();
 
         if(valor == 1) {//Actualizamos el coche en caso de ser Nuevo
-            int ID_CocheNuevo = coche.getID_Coche();
+            String ID_CocheNuevo = String.valueOf(coche.getID_Coche());
 
             datos.put("Marca", coche.getMarca());
             datos.put("Modelo", coche.getModelo());
@@ -221,6 +220,8 @@ public class DatabaseAccess {
     }
 
 
+    //METODOS PARA LOS EXTRAS
+
     //Método para obtener un Extra de la Base de Datos
     public Extras obtenerExtra(int ID_Extra) {
 
@@ -237,7 +238,7 @@ public class DatabaseAccess {
         if(c.moveToFirst()) {
 
             do { //Vamos añadiendo al ArrayList los Coches con sus valores
-                extra = new Extras(c.getInt(0), c.getString(1), c.getInt(2));
+                extra = new Extras(c.getInt(0), c.getString(1), c.getString(2), c.getInt(3));
             } while(c.moveToNext());
         }
         return extra;
@@ -260,7 +261,8 @@ public class DatabaseAccess {
                 listadoExtras.add(new Extras(
                         c.getInt(0),
                         c.getString(1),
-                        c.getInt(2)));
+                        c.getString(2),
+                        c.getInt(3)));
             } while(c.moveToNext());
 
         }
@@ -268,17 +270,16 @@ public class DatabaseAccess {
         return listadoExtras; //Devolvemos la lista de Extras que hay en la Tabla Extras
     }
 
-
     //Método para guardar un nuevo Extra en la Base de Datos
     public void guardarExtra(Extras extra) {
         ContentValues datos = new ContentValues();
         datos.put("Nombre", extra.getNombre());
+        datos.put("Descripcion", extra.getDescripcion());
         datos.put("Precio", extra.getPrecio());
 
         database.insert("Extras", null, datos);
         database.close();
     }
-
 
     //Método para borrar un Extra de la Base de Datos
     public void borrarExtra(int ID_Extra) {
@@ -287,5 +288,21 @@ public class DatabaseAccess {
         String[] whereArgs = new String[]{ID_Extra + ""};
 
         database.delete("Extras", where, whereArgs);
+    }
+
+    //Método que modifica un Extra
+    public void actualizarExtra(Extras extra) {
+        ContentValues datos = new ContentValues();
+
+        String ID_Extra = String.valueOf(extra.getID_Extra());
+
+        datos.put("Nombre",      extra.getNombre());
+        datos.put("Descripcion", extra.getDescripcion());
+        datos.put("Precio",      extra.getPrecio());
+
+        String where = "ID_Extra = ?";
+        String[] whereArgs = new String[]{ID_Extra + ""};
+
+        database.update("Extras", datos, where, whereArgs);
     }
 }

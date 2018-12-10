@@ -4,6 +4,11 @@
 
     <item
         android:id="@+id/itemExtras1"
+        android:icon="@drawable/ic_edit"
+        android:title="@string/itemModificar"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/itemExtras2"
         android:icon="@drawable/ic_borrar"
         android:title="@string/itemEliminar"
         app:showAsAction="ifRoom" />

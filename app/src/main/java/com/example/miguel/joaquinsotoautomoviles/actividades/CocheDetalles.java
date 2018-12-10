@@ -131,7 +131,26 @@ public class CocheDetalles extends AppCompatActivity {
                 edtPrecio.setTextColor(getResources().getColor(R.color.colorPrimary));
 
                 btnFlotSave.setVisibility(View.VISIBLE);
+                btnFlotSave.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String newMarca       = edtMarca.getText().toString();
+                        String newModelo      = edtModelo.getText().toString();
+                        String newDescripcion = edtDescripcion.getText().toString();
+                        String newPrecio      = String.valueOf(edtPrecio.getText());
 
+                        Coche newCoche = new Coche(codigoCoche, newMarca, newModelo, newDescripcion, Integer.valueOf(newPrecio));
+
+                        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+                        databaseAccess.open();
+
+                        databaseAccess.actualizarCoche(newCoche, valor);
+
+                        databaseAccess.close();
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                });
                 break;
 
             case R.id.itemDetalleCoche2: //Botón del Menú: Vista simple
@@ -146,6 +165,7 @@ public class CocheDetalles extends AppCompatActivity {
             case R.id.itemDetalleCoche3: //Botón del Menú: Generar presupuesto
                 String nombreCoche = marca + " " + modelo;
                 Intent actividadCrearPresupuesto = new Intent(this, CrearPresupuesto.class);
+                actividadCrearPresupuesto.putExtra("id", codigoCoche);
                 actividadCrearPresupuesto.putExtra("coche", nombreCoche.toString());
                 actividadCrearPresupuesto.putExtra("precio", precio);
                 startActivity(actividadCrearPresupuesto);

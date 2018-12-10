@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_extras"
         android:title="Extras"/>
 
+    <item
+        android:id="@+id/navegacion_conocenos"
+        android:icon="@drawable/ic_location"
+        android:title="Conócenos"/>
+
 </menu>

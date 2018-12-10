@@ -52,8 +52,11 @@ public class AdaptadorExtras extends BaseAdapter {
         TextView txvNombre = (TextView) v.findViewById(R.id.txvNombre);
         txvNombre.setText(listaExtras.getNombre());
 
+        TextView txvDescripcion = (TextView) v.findViewById(R.id.txvDescripcion);
+        txvDescripcion.setText(listaExtras.getDescripcion());
+
         TextView txvPrecio = (TextView) v.findViewById(R.id.txvPrecio);
-        txvPrecio.setText(String.valueOf(listaExtras.getPrecio()));
+        txvPrecio.setText(String.valueOf(listaExtras.getPrecio()) + " €");
 
         return v;
     }

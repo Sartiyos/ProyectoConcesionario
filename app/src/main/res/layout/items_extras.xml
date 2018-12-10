@@ -15,19 +15,33 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/app_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:singleLine="true"
+        android:text="@string/txvNombreExtra"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txvDescripcion"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txvNombre"
+        android:layout_alignStart="@+id/txvNombre"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-20dp"
+        android:singleLine="false"
+        android:text="@string/txvDescripcionExtra"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/txvPrecio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/txvNombre"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="85dp"
-        android:layout_marginRight="85dp"
-        android:text="TextView"
+        android:layout_below="@+id/txvDescripcion"
+        android:layout_alignStart="@+id/txvNombre"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:singleLine="true"
+        android:text="@string/txvPrecioExtra"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 

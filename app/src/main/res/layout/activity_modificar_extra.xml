@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".actividades.CrearExtra">
+    tools:context=".actividades.ModificarExtra">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -14,7 +14,7 @@
         android:elevation="4dp"
         android:theme="@style/botonesBlancos"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="@string/titNuevoExtra" />
+        app:title="@string/titModificarExtra" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/edtDescripcionExtra"
+            android:id="@+id/edtNombreExtra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
@@ -60,7 +60,7 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/edtNombreExtra"
+            android:id="@+id/edtDescripcionExtra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
