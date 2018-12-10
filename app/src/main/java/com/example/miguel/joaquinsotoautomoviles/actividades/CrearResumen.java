@@ -43,6 +43,9 @@ public class CrearResumen extends AppCompatActivity implements DialogoCliente.in
     private String coche;
     private int precioCoche;
 
+    private boolean[] arrayExtrasPedidos;
+    private int valor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +70,8 @@ public class CrearResumen extends AppCompatActivity implements DialogoCliente.in
         });
 
         //Obtenemos los Extras que ha marcado el usuario desde la otra Actividad
+        valor = getIntent().getIntExtra("tipo", 1);
         codigoCoche = getIntent().getIntExtra("id", 1);
-        boolean[] arrayExtrasPedidos = getIntent().getBooleanArrayExtra("extras");
         coche = getIntent().getStringExtra("coche");
         precioCoche = getIntent().getIntExtra("precio", 0);
 
@@ -85,71 +88,76 @@ public class CrearResumen extends AppCompatActivity implements DialogoCliente.in
 
         //Obtenemos todas los Extras de la Tabla Extras y también nos traemos los datos del coche
         listaTotalExtras = databaseAccess.obtenerExtras();
-        detalleCoche = databaseAccess.obtenerDatosCoche(codigoCoche, 1);
+        detalleCoche = databaseAccess.obtenerDatosCoche(codigoCoche, valor);
 
-        //Preparamos el AdaptadorExtras
-        adaptadorExtras = new AdaptadorExtras(this, listaTotalExtras);
+        //En caso de ser coche de ocasion se hará todo este codigo
+        if(valor == 1) {
+            arrayExtrasPedidos = getIntent().getBooleanArrayExtra("extras");
 
-        cantidadExtras = adaptadorExtras.getCount();
+            //Preparamos el AdaptadorExtras
+            adaptadorExtras = new AdaptadorExtras(this, listaTotalExtras);
 
-        for(int i = 0; i < cantidadExtras; i++) {
-            if(arrayExtrasPedidos[i]) {
+            cantidadExtras = adaptadorExtras.getCount();
 
-                //Obtenemos los datos del Extra y lo añadimos al ListView
-                listaExtras.add(databaseAccess.obtenerExtra(i+1));
+            for (int i = 0; i < cantidadExtras; i++) {
+                if (arrayExtrasPedidos[i]) {
 
+                    //Obtenemos los datos del Extra y lo añadimos al ListView
+                    listaExtras.add(databaseAccess.obtenerExtra(i + 1));
+
+                }
             }
-        }
 
-        //Cerramos la conexión con la Base de Datos
-        databaseAccess.close();
+            //Cerramos la conexión con la Base de Datos
+            databaseAccess.close();
 
-        //Comprobamos si tenemos Extras que añadir
-        if(listaExtras.size() != 0) {
+            //Comprobamos si tenemos Extras que añadir
+            if (listaExtras.size() != 0) {
 
-            //Creamos un Layout para mostrar en él, todos los extras que se han marcado en la otra
-            //actividad
-            for (int i = 0; i < listaExtras.size(); i++) {
-                String nombre = listaExtras.get(i).getNombre();
-                String precio = String.valueOf(listaExtras.get(i).getPrecio());
+                //Creamos un Layout para mostrar en él, todos los extras que se han marcado en la otra
+                //actividad
+                for (int i = 0; i < listaExtras.size(); i++) {
+                    String nombre = listaExtras.get(i).getNombre();
+                    String precio = String.valueOf(listaExtras.get(i).getPrecio());
 
-                precioFinal = precioFinal + Integer.valueOf(precio);
+                    precioFinal = precioFinal + Integer.valueOf(precio);
 
-                LinearLayout contenedor = new LinearLayout(this);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT);
-                contenedor.setLayoutParams(params);
+                    LinearLayout contenedor = new LinearLayout(this);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT);
+                    contenedor.setLayoutParams(params);
 
-                TextView nombreExtra = new TextView(this);
-                TextView precioExtra = new TextView(this);
+                    TextView nombreExtra = new TextView(this);
+                    TextView precioExtra = new TextView(this);
 
-                nombreExtra.setLayoutParams(new TableLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+                    nombreExtra.setLayoutParams(new TableLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
 
-                precioExtra.setLayoutParams(new TableLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT, 4f));
+                    precioExtra.setLayoutParams(new TableLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT, 4f));
 
-                nombreExtra.setId(i);
-                nombreExtra.setText(nombre);
-                nombreExtra.setPadding(5, 5, 5, 5);
-                nombreExtra.setGravity(Gravity.LEFT);
-                nombreExtra.setTextColor(Color.BLACK);
+                    nombreExtra.setId(i);
+                    nombreExtra.setText(nombre);
+                    nombreExtra.setPadding(5, 5, 5, 5);
+                    nombreExtra.setGravity(Gravity.LEFT);
+                    nombreExtra.setTextColor(Color.BLACK);
 
 
-                precioExtra.setId(i);
-                precioExtra.setText(precio + " €");
-                precioExtra.setPadding(5, 5, 5, 5);
-                precioExtra.setGravity(Gravity.RIGHT);
-                precioExtra.setTextColor(Color.BLACK);
+                    precioExtra.setId(i);
+                    precioExtra.setText(precio + " €");
+                    precioExtra.setPadding(5, 5, 5, 5);
+                    precioExtra.setGravity(Gravity.RIGHT);
+                    precioExtra.setTextColor(Color.BLACK);
 
-                //Agrega vistas al contenedor.
-                contenedor.addView(nombreExtra);
-                contenedor.addView(precioExtra);
+                    //Agrega vistas al contenedor.
+                    contenedor.addView(nombreExtra);
+                    contenedor.addView(precioExtra);
 
-                layExtras.addView(contenedor);
+                    layExtras.addView(contenedor);
+                }
             }
         }
 
@@ -195,7 +203,7 @@ public class CrearResumen extends AppCompatActivity implements DialogoCliente.in
     }
 
     @Override
-    public void llamarDialogoCliente(String nombre, String apellidos, int telefono, String email, String poblacion, String direccion) {
+    public void llamarDialogoCliente(String nombre, String apellidos, int telefono, String email, String poblacion, String direccion, String fecha) {
 
         String[] TO = {email};
 
@@ -208,6 +216,7 @@ public class CrearResumen extends AppCompatActivity implements DialogoCliente.in
 
         String mensaje = "Estimado " + nombre + " " + apellidos + "\n\n" +
                 "Se ha registrado con los siguientes datos:\n" +
+                "· Fecha de Nacimiento: " + fecha + "\n" +
                 "· Telefono: " + telefono + "\n" +
                 "· Dirección: " + direccion + ", " + poblacion + "\n\n" +
                 "A continuación le adjuntamos los datos del presupuesto del coche " + coche + "\n" +
@@ -229,7 +238,7 @@ public class CrearResumen extends AppCompatActivity implements DialogoCliente.in
 
 
         // Esto podrás modificarlo si quieres, el asunto y el cuerpo del mensaje
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Presupuesto del coche" + coche);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Presupuesto del coche " + coche);
         emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
 
         try {

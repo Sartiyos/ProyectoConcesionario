@@ -1,11 +1,13 @@
 package com.example.miguel.joaquinsotoautomoviles.actividades;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -154,12 +156,27 @@ public class CocheDetalles extends AppCompatActivity {
                 break;
 
             case R.id.itemDetalleCoche2: //Botón del Menú: Vista simple
-                DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
-                databaseAccess.open();
-                databaseAccess.borrarCoche(codigoCoche, valor);
-                databaseAccess.close();
-                setResult(RESULT_OK);
-                finish();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("¿Desea eliminar este vehículo?");
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {}
+                });
+
+                builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+                        databaseAccess.open();
+                        databaseAccess.borrarCoche(codigoCoche, valor);
+                        databaseAccess.close();
+                        setResult(RESULT_OK);
+                        finish();
+
+                    }
+                });
+                builder.show();
                 break;
 
             case R.id.itemDetalleCoche3: //Botón del Menú: Generar presupuesto
@@ -168,8 +185,10 @@ public class CocheDetalles extends AppCompatActivity {
                 actividadCrearPresupuesto.putExtra("id", codigoCoche);
                 actividadCrearPresupuesto.putExtra("coche", nombreCoche.toString());
                 actividadCrearPresupuesto.putExtra("precio", precio);
+                actividadCrearPresupuesto.putExtra("tipo", valor);
                 startActivity(actividadCrearPresupuesto);
         }
         return true;
     }
+
 }

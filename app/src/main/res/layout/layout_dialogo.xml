@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="40dp"
+    android:layout_marginTop="10dp"
     android:layout_marginRight="40dp"
     android:orientation="vertical">
 
@@ -14,7 +15,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:padding="3dp"
@@ -24,7 +25,7 @@
 
         <EditText
             android:id="@+id/edtNombre"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:inputType="textPersonName"
@@ -37,7 +38,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:padding="3dp"
@@ -47,7 +48,7 @@
 
         <EditText
             android:id="@+id/edtApellidos"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:inputType="text"
@@ -60,7 +61,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:padding="3dp"
@@ -70,7 +71,7 @@
 
         <EditText
             android:id="@+id/edtTelefono"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:inputType="phone"
@@ -83,7 +84,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:padding="3dp"
@@ -93,7 +94,7 @@
 
         <EditText
             android:id="@+id/edtEmail"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:inputType="textEmailAddress"
@@ -106,7 +107,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:padding="3dp"
@@ -116,7 +117,7 @@
 
         <EditText
             android:id="@+id/edtDireccion"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:inputType="textPersonName"
@@ -129,7 +130,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:padding="3dp"
@@ -139,7 +140,7 @@
 
         <EditText
             android:id="@+id/edtPoblacion"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:inputType="textPersonName"
@@ -152,17 +153,17 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:padding="3dp"
-            android:text="Fecha de Nacimiento"
+            android:text="F. Nacimiento"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColor="@android:color/white" />
 
         <EditText
             android:id="@+id/edtFecha"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:inputType="date"
@@ -172,6 +173,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 

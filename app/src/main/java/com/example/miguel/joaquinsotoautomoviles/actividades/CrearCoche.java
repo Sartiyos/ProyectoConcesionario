@@ -40,6 +40,7 @@ public class CrearCoche extends AppCompatActivity {
     private ImageView imgFoto;
     private FloatingActionButton btnFlotCrear;
 
+
     private byte[] imagenCoche;
 
     private int valor;
@@ -158,35 +159,38 @@ public class CrearCoche extends AppCompatActivity {
 
         //Si es 0 viene de la cámara
         if(requestCode == 0) {
-            //Guardamos los datos obtenidos en un mapa de bits
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            if(data.getExtras() != null) {
+                //Guardamos los datos obtenidos en un mapa de bits
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 
-            //Lo colocamos en el ImageView
-            imgFoto.setImageBitmap(bitmap);
+                //Lo colocamos en el ImageView
+                imgFoto.setImageBitmap(bitmap);
 
-            //Creamos un Array de Bytes de salida
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                //Creamos un Array de Bytes de salida
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
-            //Comprimimos en PNG
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            imagenCoche = stream.toByteArray();
+                //Comprimimos en PNG
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                imagenCoche = stream.toByteArray();
+            }
         }
 
         //Si es 1 viene de la Galería
         if(requestCode == 1) {
-            Uri imageURI = data.getData();
-            imgFoto.setImageURI(imageURI);
+            if(data != null) {
+                Uri imageURI = data.getData();
+                imgFoto.setImageURI(imageURI);
 
-            imgFoto.buildDrawingCache();
-            Bitmap bitmap = imgFoto.getDrawingCache();
+                imgFoto.buildDrawingCache();
+                Bitmap bitmap = imgFoto.getDrawingCache();
 
-            Bitmap bitmapfinal = Bitmap.createScaledBitmap(bitmap,400,195,false);
+                Bitmap bitmapfinal = Bitmap.createScaledBitmap(bitmap, 400, 195, false);
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmapfinal.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmapfinal.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
-            imagenCoche = stream.toByteArray();
-
+                imagenCoche = stream.toByteArray();
+            }
         }
     }
 

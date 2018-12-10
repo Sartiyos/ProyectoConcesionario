@@ -28,6 +28,7 @@ public class CrearPresupuesto extends AppCompatActivity {
     //Objetos necesarios
     private ArrayList<Extras> listaExtras;
     private AdaptadorExtras adaptadorExtras;
+    private boolean[] arrayExtras;
 
 
 
@@ -39,6 +40,7 @@ public class CrearPresupuesto extends AppCompatActivity {
         final int codigoCoche = getIntent().getIntExtra("id", 1);
         final String titulo = getIntent().getStringExtra("coche");
         final int precio = getIntent().getIntExtra("precio", 0);
+        final int valor = getIntent().getIntExtra("tipo", 1);
 
         //Creamos un objeto Toolbar y lo vinculamos con el del XML
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -52,33 +54,40 @@ public class CrearPresupuesto extends AppCompatActivity {
 
         txvPrecioCoche.setText(String.valueOf(precio) + " €");
 
-        adaptadorExtras();
+        if(valor == 1) {
+            adaptadorExtras();
 
-        //Array de Booleanos para guardar que extras estan marcados y cuales no
-        final boolean[] arrayExtras = new boolean[adaptadorExtras.getCount()];
+            //Array de Booleanos para guardar que extras estan marcados y cuales no
+            arrayExtras = new boolean[adaptadorExtras.getCount()];
 
-        lisvExtras.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(arrayExtras[i] == false) {
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent)); //Coloreamos el elemento marcado
-                    arrayExtras[i] = true;
+            lisvExtras.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    if(arrayExtras[i] == false) {
+                        view.setBackgroundColor(getResources().getColor(R.color.colorAccent)); //Coloreamos el elemento marcado
+                        arrayExtras[i] = true;
+                    }
+
+                    else if (arrayExtras[i] == true) {
+                        view.setBackgroundColor(Color.alpha(0));  //Quitamos el color al elemento
+                        arrayExtras[i] = false;
+                    }
                 }
+            });
+        }
 
-                else if (arrayExtras[i] == true) {
-                    view.setBackgroundColor(Color.alpha(0));  //Quitamos el color al elemento
-                    arrayExtras[i] = false;
-                }
-            }
-        });
+
 
         //Creamos una escucha para el btnFlotAdd
         btnFlotGenerar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent actividadCrearExtra = new Intent(getApplicationContext(), CrearResumen.class);
+                actividadCrearExtra.putExtra("tipo", valor);
                 actividadCrearExtra.putExtra("id", codigoCoche);
-                actividadCrearExtra.putExtra("extras", arrayExtras);
+                if(valor == 1) {
+                    actividadCrearExtra.putExtra("extras", arrayExtras);
+                }
                 actividadCrearExtra.putExtra("coche", titulo);
                 actividadCrearExtra.putExtra("precio", precio);
                 startActivity(actividadCrearExtra);
