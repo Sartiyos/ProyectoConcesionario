@@ -27,4 +27,9 @@
     <string name="txvExtras">Extras añadibles al coche</string>
     <string name="title_activity_maps">Map</string>
 
+    <string name="txvWeb">facebook.com/joaquinsotoautomoviles</string>
+    <string name="txvTelefono">957 61 75 80</string>
+    <string name="txvCorreo">info@joaquinsotoautomoviles.com</string>
+    <string name="txvDireccion">C/ Aceituneros Panaderos, 26</string>
+
 </resources>

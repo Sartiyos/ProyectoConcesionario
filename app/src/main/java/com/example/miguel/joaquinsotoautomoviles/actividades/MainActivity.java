@@ -3,7 +3,6 @@ package com.example.miguel.joaquinsotoautomoviles.actividades;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.view.MenuItem;
 
 import com.example.miguel.joaquinsotoautomoviles.fragmentos.ConocenosFragment;
 import com.example.miguel.joaquinsotoautomoviles.fragmentos.ExtrasFragment;
-import com.example.miguel.joaquinsotoautomoviles.fragmentos.MapsActivity;
 import com.example.miguel.joaquinsotoautomoviles.fragmentos.NuevoFragment;
 import com.example.miguel.joaquinsotoautomoviles.fragmentos.OcasionFragment;
 import com.example.miguel.joaquinsotoautomoviles.R;
