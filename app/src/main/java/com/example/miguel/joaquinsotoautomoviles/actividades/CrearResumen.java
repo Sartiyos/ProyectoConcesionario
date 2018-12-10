@@ -26,24 +26,37 @@ import java.util.ArrayList;
 
 public class CrearResumen extends AppCompatActivity implements DialogoCliente.interfaceDialogoCliente {
 
-    //Objetos necesarios
-    private ArrayList<Extras> listaTotalExtras;
-    private ArrayList<Extras> listaExtras = new ArrayList<>();
-    private ArrayList<Coche> detalleCoche = new ArrayList<>();
-    private AdaptadorExtras adaptadorExtras;
-    private int cantidadExtras;
-
+    //Objetos con los que identificaremos a los componentes del XML
     private LinearLayout layExtras;
     private TextView txvNombreCoche;
     private TextView txvPrecioCoche;
     private FloatingActionButton btnFlotEnviar;
 
+    //ArrayList donde guardamos todos los extras de la base de datos
+    private ArrayList<Extras> listaTotalExtras;
+
+    //ArrayList donde guardamos los extras que han sido marcados
+    private ArrayList<Extras> listaExtras = new ArrayList<>();
+
+    //ArrayList donde guardamos los datos del coche
+    private ArrayList<Coche> detalleCoche = new ArrayList<>();
+
+    //Adaptador con el que mostraremos los extras a en el ListView
+    private AdaptadorExtras adaptadorExtras;
+
+    //Entero donde guardaremos la cantidad de Extras que han sido marcados
+    private int cantidadExtras;
+
+    //Variables que nos hemos traido desde la otra actividad
     private int codigoCoche;
     private int precioFinal;
-    private String coche;
     private int precioCoche;
+    private String coche;
 
+    //Array de booleanos donde guardaremos cuales son los extras marcados
     private boolean[] arrayExtrasPedidos;
+
+    //Valor sirve para identificar si es un coche nuevo o de ocasión
     private int valor;
 
 
@@ -53,26 +66,21 @@ public class CrearResumen extends AppCompatActivity implements DialogoCliente.in
         setContentView(R.layout.activity_crear_resumen);
 
         //XML
-        layExtras = (LinearLayout) findViewById(R.id.layExtras);
+        layExtras      = (LinearLayout) findViewById(R.id.layExtras);
         txvNombreCoche = (TextView) findViewById(R.id.txvNombreCoche);
         txvPrecioCoche = (TextView) findViewById(R.id.txvPrecioCoche);
-
-        final Context contexto = this;
-
-        btnFlotEnviar = (FloatingActionButton) findViewById(R.id.btnFlotEnviar);
+        btnFlotEnviar  = (FloatingActionButton) findViewById(R.id.btnFlotEnviar);
         btnFlotEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //sendEmail();
-                new DialogoCliente(contexto, CrearResumen.this);
-
+                new DialogoCliente(getApplicationContext(), CrearResumen.this);
             }
         });
 
         //Obtenemos los Extras que ha marcado el usuario desde la otra Actividad
-        valor = getIntent().getIntExtra("tipo", 1);
+        valor       = getIntent().getIntExtra("tipo", 1);
         codigoCoche = getIntent().getIntExtra("id", 1);
-        coche = getIntent().getStringExtra("coche");
+        coche       = getIntent().getStringExtra("coche");
         precioCoche = getIntent().getIntExtra("precio", 0);
 
         //Sumamos el precio del coche
@@ -90,7 +98,7 @@ public class CrearResumen extends AppCompatActivity implements DialogoCliente.in
         listaTotalExtras = databaseAccess.obtenerExtras();
         detalleCoche = databaseAccess.obtenerDatosCoche(codigoCoche, valor);
 
-        //En caso de ser coche de ocasion se hará todo este codigo
+        //En caso de ser coche nuevo se ejecutará lo siguiente
         if(valor == 1) {
             arrayExtrasPedidos = getIntent().getBooleanArrayExtra("extras");
 
@@ -114,8 +122,8 @@ public class CrearResumen extends AppCompatActivity implements DialogoCliente.in
             //Comprobamos si tenemos Extras que añadir
             if (listaExtras.size() != 0) {
 
-                //Creamos un Layout para mostrar en él, todos los extras que se han marcado en la otra
-                //actividad
+                //Creamos un Layout para mostrar en él, todos los extras que se han marcado en la
+                //otra actividad
                 for (int i = 0; i < listaExtras.size(); i++) {
                     String nombre = listaExtras.get(i).getNombre();
                     String precio = String.valueOf(listaExtras.get(i).getPrecio());
@@ -202,6 +210,8 @@ public class CrearResumen extends AppCompatActivity implements DialogoCliente.in
 
     }
 
+    //Método donde mostraremos un diálogo para recoger los datos del cliente y posteriormente
+    //enviarlo por correo
     @Override
     public void llamarDialogoCliente(String nombre, String apellidos, int telefono, String email, String poblacion, String direccion, String fecha) {
 

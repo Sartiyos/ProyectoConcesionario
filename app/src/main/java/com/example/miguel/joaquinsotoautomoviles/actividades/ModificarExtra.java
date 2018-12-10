@@ -13,13 +13,13 @@ import com.example.miguel.joaquinsotoautomoviles.clases.Extras;
 
 public class ModificarExtra extends AppCompatActivity {
 
-    //Objetos que identifica a los elementos del XML
+    //Objetos con los que identificaremos a los componentes del XML
     private EditText edtNombre;
     private EditText edtDescripcion;
     private EditText edtPrecio;
     private FloatingActionButton btnFlotSave;
 
-    //Objetos necesarios
+    //Objeto de tipo Extra donde se almacenará los datos de un Extra
     private Extras extra;
 
     @Override

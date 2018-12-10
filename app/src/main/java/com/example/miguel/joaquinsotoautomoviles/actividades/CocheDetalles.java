@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +26,7 @@ import java.util.ArrayList;
 
 public class CocheDetalles extends AppCompatActivity {
 
-    //Objetos que identifica a los componentes del XML
+    //Objetos con los que identificaremos a los componentes del XML
     private EditText edtMarca;
     private EditText edtModelo;
     private EditText edtPrecio;
@@ -38,9 +37,10 @@ public class CocheDetalles extends AppCompatActivity {
     //ArrayList que contendrá los Coches Nuevos y los Coches de Ocasión
     private ArrayList<Coche> detalleCoche;
 
-    //Enteros donde contendrá el identificador del coche y valor contendrá si es uno nuevo o de
-    //ocasión
+    //Enteros donde contendrá el ID del Coche
     private int codigoCoche;
+
+    //Valor sirve para identificar si es un coche nuevo o de ocasión
     private int valor;
 
     //Atributos de la clase Coche
@@ -71,13 +71,13 @@ public class CocheDetalles extends AppCompatActivity {
         Intent recibidor = getIntent();
         Bundle paquete = recibidor.getExtras();
         codigoCoche = (int) paquete.getSerializable("codigocoche");
-        valor = (int) paquete.getSerializable("entero");
+        valor       = (int) paquete.getSerializable("entero");
 
         //Creamos un objeto DatabaseAccess para tener acceso a la Base de Datos
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
 
-        //Obtenemos todas las Personas de la Tabla Persona
+        //Obtenemos todas laos Coches de la Tabla Coches, Nuevo o de Ocasión dependiendo de valor
         detalleCoche = databaseAccess.obtenerDatosCoche(codigoCoche, valor);
 
         //Recogemos los datos del Cliente que queremos modificar

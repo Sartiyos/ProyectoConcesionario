@@ -28,11 +28,10 @@ import com.example.miguel.joaquinsotoautomoviles.basededatos.DatabaseAccess;
 import com.example.miguel.joaquinsotoautomoviles.clases.Coche;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 
 public class CrearCoche extends AppCompatActivity {
 
-    //Objetos que identifica a los componentes del XML
+    //Objetos con los que identificaremos a los componentes del XML
     private EditText edtMarca;
     private EditText edtModelo;
     private EditText edtPrecio;
@@ -40,9 +39,10 @@ public class CrearCoche extends AppCompatActivity {
     private ImageView imgFoto;
     private FloatingActionButton btnFlotCrear;
 
-
+    //Array de bytes donde guardaremos la imagen del coche
     private byte[] imagenCoche;
 
+    //Valor sirve para identificar si es un coche nuevo o de ocasión
     private int valor;
 
     @Override

@@ -17,7 +17,7 @@ import com.example.miguel.joaquinsotoautomoviles.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Creamos un objeto de la Clase BottomNavigationView
+    //Objetos con los que identificaremos a los componentes del XML
     private BottomNavigationView btnNavegacion;
 
     @Override

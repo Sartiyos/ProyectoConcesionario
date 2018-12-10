@@ -96,7 +96,7 @@ public class OcasionFragment extends Fragment {
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getContext());
         databaseAccess.open();
 
-        //Obtenemos todas las Personas de la Tabla Persona
+        //Obtenemos todas los Coches de la Tabla Coches de Ocasion
         listaCochesOcasion = databaseAccess.obtenerCoches(2);
 
         //Cerramos la conexión con la Base de Datos

@@ -20,17 +20,19 @@ import java.util.ArrayList;
 
 public class CrearPresupuesto extends AppCompatActivity {
 
-    //Objetos que identifica a los componentes del XML
+    //Objetos con los que identificaremos a los componentes del XML
     private ListView lisvExtras;
     private TextView txvPrecioCoche;
     private FloatingActionButton btnFlotGenerar;
 
-    //Objetos necesarios
+    //ArrayList donde mostramos todos los extras
     private ArrayList<Extras> listaExtras;
+
+    //Adaptador con el que mostraremos los extras a en el ListView
     private AdaptadorExtras adaptadorExtras;
+
+    //Array de booleanos donde guardaremos cuales son los extras marcados
     private boolean[] arrayExtras;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class CrearPresupuesto extends AppCompatActivity {
 
         txvPrecioCoche.setText(String.valueOf(precio) + " €");
 
+        //En caso de ser un coche nuevo se ejecutará lo siguiente
         if(valor == 1) {
             adaptadorExtras();
 
@@ -76,8 +79,6 @@ public class CrearPresupuesto extends AppCompatActivity {
             });
         }
 
-
-
         //Creamos una escucha para el btnFlotAdd
         btnFlotGenerar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,12 +97,13 @@ public class CrearPresupuesto extends AppCompatActivity {
 
     }
 
+    //Método para actualizar el adaptador
     public void adaptadorExtras() {
         //Creamos un objeto DatabaseAccess para tener acceso a la Base de Datos
         DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
         databaseAccess.open();
 
-        //Obtenemos todas las Personas de la Tabla Persona
+        //Obtenemos todas los Extras de la Tabla Extras
         listaExtras = databaseAccess.obtenerExtras();
 
         //Cerramos la conexión con la Base de Datos

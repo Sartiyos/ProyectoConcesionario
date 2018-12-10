@@ -13,7 +13,7 @@ import com.example.miguel.joaquinsotoautomoviles.clases.Extras;
 
 public class CrearExtra extends AppCompatActivity {
 
-    //Objetos que identifica a los elementos del XML
+    //Objetos con los que identificaremos a los componentes del XML
     private EditText edtNombre;
     private EditText edtDescripcion;
     private EditText edtPrecio;

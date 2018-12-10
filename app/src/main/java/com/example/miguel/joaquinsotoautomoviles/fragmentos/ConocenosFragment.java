@@ -27,14 +27,15 @@ public class ConocenosFragment extends Fragment {
             mapFragment.getMapAsync(new OnMapReadyCallback() {
                 @Override
                 public void onMapReady(GoogleMap googleMap) {
-                    LatLng empresa = new LatLng(37.4003359, -4.7536589);
-                    googleMap.addMarker(new MarkerOptions().position(empresa).title("Joaquín Soto Automoviles"));
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(empresa, 15));
+                    LatLng empresa = new LatLng(37.4003359, -4.7536589); //Coordenadas
+                    googleMap.addMarker(new MarkerOptions().position(empresa).title("Joaquín Soto Automoviles"));//Marcador
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(empresa, 15));//Zoom del mapa
                     googleMap.animateCamera(CameraUpdateFactory.newLatLng(empresa));
                 }
             });
         }
 
+        //Cargamos el mapa en el fragment map
         getChildFragmentManager().beginTransaction().replace(R.id.map, mapFragment).commit();
 
         return rootView;
